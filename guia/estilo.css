@@ -1,13 +1,45 @@
-body {
-    background-color: #f8f9fa;
+.card {
+    border-radius: 20px;         /* Bordes redondeados */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15); /* Sombra suave */
+    overflow: hidden;            /* Mantener bordes en imágenes */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    height: 100%;                /* Ocupa todo el alto disponible */
+    display: flex;
+    flex-direction: column;
 }
 
-.is-invalid {
-    border-color: #dc3545 !important;
-    box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
+.card:hover {
+    transform: translateY(-5px); /* Efecto al pasar el mouse */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
-.invalid-feedback {
-    display: block;
-    color: #dc3545;
+.card img {
+    height: 250px;               /* Tamaño fijo para la imagen */
+    object-fit: cover;           /* Mantiene proporción y recorta */
 }
+
+.card-body {
+    flex: 1;                     /* Ocupa el resto del espacio */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    text-align: center;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.card-text {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.card .btn {
+    border-radius: 30px;         /* Botón redondeado */
+    padding: 10px 20px;
+}
+
