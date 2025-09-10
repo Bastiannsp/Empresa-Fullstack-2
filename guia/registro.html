@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title>
+</head>
+<body>
+<h2>Registro de Usuario</h2>
+<form id="registroForm">
+    <label>Nombre:</label><br>
+    <input type="text" id="nombre" required><br><br>
+
+    <label>Email:</label><br>
+    <input type="email" id="email" required><br><br>
+
+    <label>Contraseña:</label><br>
+    <input type="password" id="password" required><br><br>
+
+    <label>Fecha de nacimiento:</label><br>
+    <input type="date" id="fechaNacimiento" required><br><br>
+
+    <button type="submit">Registrarse</button>
+</form>
+
+<p id="mensaje"></p>
+
+<script>
+    const mensaje = document.getElementById("mensaje");
+
+    document.getElementById("registroForm").addEventListener("submit", function(event){
+        event.preventDefault();
+
+        const nombre = document.getElementById("nombre").value;
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const fechaNacimiento = new Date(document.getElementById("fechaNacimiento").value);
+
+        // 🔹 Validar edad
+        const hoy = new Date();
+        let edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+        const m = hoy.getMonth() - fechaNacimiento.getMonth();
+        if (m < 0 || (m === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+            edad--;
+        }
+
+        if (edad < 18) {
+            mensaje.textContent = "❌ Debes ser mayor de edad para registrarte.";
+            mensaje.style.color = "red";
+            return;
+        }
+
+        // 🔹 Validar descuento por correo @ducouc.cl
+        let descuento = false;
+        if (email.endsWith("@ducouc.cl")) {
+            descuento = true;
+        }
+
+        // Guardar usuario en localStorage
+        const usuario = {
+            nombre,
+            email,
+            password,
+            fechaNacimiento: fechaNacimiento.toISOString().split('T')[0],
+            descuento
+        };
+        localStorage.setItem("usuario", JSON.stringify(usuario));
+
+        // Mostrar mensaje
+        mensaje.textContent = "✅ Registro exitoso! " + (descuento ? "Tienes descuento por ser de ducouc.cl 🎉" : "");
+        mensaje.style.color = "green";
+
+        // Redirigir al login después de 1.5s
+        setTimeout(()=>{ window.location.href = "login.html"; }, 1500);
+    });
+</script>
+</body>
+</html>

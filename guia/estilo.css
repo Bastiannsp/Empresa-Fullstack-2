@@ -11,10 +11,3 @@ body {
     display: block;
     color: #dc3545;
 }
-
-/* Espaciado y ajuste de imagen del hero */
-#contenido img.rounded-4 {
-  object-fit: cover;
-  width: 100%;
-  max-height: 360px;
-}

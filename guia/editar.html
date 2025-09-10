@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Usuario</title>
+</head>
+<body>
+<h2>Editar Usuario</h2>
+<form id="editarForm">
+    <label>Nombre:</label><br>
+    <input type="text" id="editNombre" required><br><br>
+
+    <label>Email:</label><br>
+    <input type="email" id="editEmail" required><br><br>
+
+    <label>Contraseña:</label><br>
+    <input type="password" id="editPassword" required><br><br>
+
+    <button type="submit">Guardar Cambios</button>
+</form>
+
+<p id="mensaje"></p>
+
+<script>
+
+    if(localStorage.getItem("sesion") !== "true"){
+        alert("❌ Debes iniciar sesión primero.");
+        window.location.href = "login.html";
+    }
+
+    const usuarioGuardado = JSON.parse(localStorage.getItem("usuario"));
+    document.getElementById("editNombre").value = usuarioGuardado.nombre;
+    document.getElementById("editEmail").value = usuarioGuardado.email;
+    document.getElementById("editPassword").value = usuarioGuardado.password;
+
+    const mensaje = document.getElementById("mensaje");
+
+    document.getElementById("editarForm").addEventListener("submit", function(event){
+        event.preventDefault();
+
+        const usuarioActualizado = {
+            nombre: document.getElementById("editNombre").value,
+            email: document.getElementById("editEmail").value,
+            password: document.getElementById("editPassword").value
+        };
+
+        localStorage.setItem("usuario", JSON.stringify(usuarioActualizado));
+        mensaje.textContent = "✅ Usuario actualizado correctamente!";
+        mensaje.style.color = "blue";
+
+        setTimeout(()=>{ window.location.href = "index.html"; }, 1000);
+    });
+</script>
+</body>
+</html>
