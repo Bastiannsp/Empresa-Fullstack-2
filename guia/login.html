@@ -12,7 +12,6 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Barra de navegación principal">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
-                <!-- Logo/Texto -->
                 <img src="img/logo.png" alt="Logo de la tienda" width="32" height="32" onerror="this.style.display='none'">
                 <span>LEVEL-UP GAMER</span>
             </a>
@@ -24,21 +23,17 @@
 
             <div class="collapse navbar-collapse" id="navbarFS2">
                 <ul class="navbar-nav ms-auto">
-                    <!-- Tienda -->
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="estadisticas.html">Productos</a></li>
                     <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
                     <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
-                    <!-- Auth -->
                     <li class="nav-item"><a class="nav-link" href="registro.html">Registro</a></li>
-                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-                    <!-- Carrito -->
+                    <li class="nav-item"><a class="nav-link active" href="login.html">Login</a></li>
                     <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-1" href="carrito.html" aria-label="Ver carrito">
+                        <a class="nav-link d-flex align-items-center gap-1" href="carrito.html">
                             🛒 <span id="cartCount" class="badge text-bg-light">0</span>
                         </a>
                     </li>
-                    <!-- Admin (luego protegeremos por rol) -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="adminMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Admin
@@ -54,18 +49,29 @@
         </div>
     </nav>
 </header>
-<h2>Login</h2>
-<form id="loginForm">
-    <label>Email:</label><br>
-    <input type="email" id="email" required><br><br>
 
-    <label>Contraseña:</label><br>
-    <input type="password" id="password" required><br><br>
+<!-- 📝 FORMULARIO LOGIN -->
+<div class="container my-5">
+    <h2 class="text-center mb-4">Iniciar Sesión</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <form id="loginForm" class="p-4 border rounded-3 bg-light shadow">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo electrónico</label>
+                    <input type="email" class="form-control" id="email" placeholder="correo@ejemplo.com" required>
+                </div>
 
-    <button type="submit">Ingresar</button>
-</form>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="password" placeholder="********" required>
+                </div>
 
-<p id="mensaje"></p>
+                <button type="submit" class="btn btn-dark w-100">Ingresar</button>
+                <p id="mensaje" class="mt-3 text-center"></p>
+            </form>
+        </div>
+    </div>
+</div>
 
 <script>
     const mensaje = document.getElementById("mensaje");
@@ -87,9 +93,7 @@
         if(email === usuarioGuardado.email && password === usuarioGuardado.password){
             mensaje.textContent = "✅ Login exitoso!";
             mensaje.style.color = "green";
-
             localStorage.setItem("sesion", "true");
-
             setTimeout(()=>{ window.location.href = "index.html"; }, 1000);
         } else {
             mensaje.textContent = "❌ Email o contraseña incorrectos.";
@@ -98,7 +102,6 @@
     });
 </script>
 
-<!-- Esto siempre al fianl del body -->
 <footer class="bg-dark text-light mt-5">
     <div class="container py-4">
         <div class="row gy-3">
@@ -117,7 +120,7 @@
             <div class="col-md">
                 <h6 class="text-uppercase mb-3">Contacto</h6>
                 <address class="mb-1">Santiago, Chile</address>
-                <a class="link-light text-decoration-none" href="mailto:soporte@tiendafs2.com">soporte@levelupgamer.com</a>
+                <a class="link-light text-decoration-none" href="mailto:soporte@levelupgamer.com">soporte@levelupgamer.com</a>
             </div>
         </div>
     </div>
