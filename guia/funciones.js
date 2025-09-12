@@ -18,7 +18,7 @@ function validarFormulario() {
    ========================= */
 const productosDemo = [
     { id: 1, nombre: "Auriculares Inalámbricos", precio: 24990, img: "img/audifonos-wirless-earfun-free-2.jpg" }, // <-- añade .jpg
-    { id: 2, nombre: "Smartwatch Deportivo",     precio: 39990, img: "img/audifonos-wirless-earfun-free-2.jpg" },
+    { id: 2, nombre: "Smartwatch Deportivo",     precio: 39990, img: "img/smarwatch.jpg" },
     { id: 3, nombre: "Mochila Antirrobo",         precio: 19990, img: "img/audifonos-wirless-earfun-free-2.jpg" },
     { id: 4, nombre: "Teclado Mecánico",          precio: 45990, img: "img/audifonos-wirless-earfun-free-2.jpg" },
 ];
