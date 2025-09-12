@@ -43,3 +43,55 @@
     padding: 10px 20px;
 }
 
+/* Tema LEVEL-UP GAMER */
+:root{
+  --bg:#000000;
+  --fg:#ffffff;
+  --muted:#d3d3d3;
+  --accent-blue:#1E90FF;   /* azul eléctrico */
+  --accent-green:#39FF14;  /* verde neón */
+}
+
+html,body{
+  background:#fff;      /* fondo blanco */
+  color:#000;           /* texto negro para contraste */
+  font-family:"Roboto", system-ui, -apple-system, sans-serif;
+}
+
+
+/* Encabezados en Orbitron para vibra gamer */
+h1,h2,h3,h4,h5,h6,.display-6,.navbar-brand span{ font-family:"Orbitron", sans-serif; letter-spacing:.5px; }
+
+/* Navbar oscuro total */
+.navbar.bg-dark{ background:#000 !important; }
+.navbar .nav-link{ color:var(--muted); }
+.navbar .nav-link.active, .navbar .nav-link:hover{ color:var(--accent-green); }
+
+/* Botones principales con acento azul, hover verde */
+.btn-primary{ background:var(--accent-blue); border-color:var(--accent-blue); }
+.btn-primary:hover{ background:var(--accent-green); border-color:var(--accent-green); color:#000; }
+
+/* Cards de productos: borde sutil + hover */
+.card{ background:#fff; border:1px solid #ddd; }
+.card .card-title{ color:#333; }
+.card .text-primary{ color:var(--accent-blue) !important; }
+footer{ background:#f8f9fa !important; color:#333; }
+footer a{ color:#1E90FF; }
+
+
+/* Footer oscuro */
+footer{ background:#000 !important; color:var(--muted); }
+footer a{ color:#fff; }
+
+/* Nosotros: avatar redondo consistente en cards del equipo */
+.avatar{
+  width:120px; height:120px; object-fit:cover;
+}
+
+/* Espacio uniforme entre secciones de nosotros */
+#contenido section + section{ margin-top: 2rem; }
+
+/* Badges de valores: que no se corten y se vean centradas */
+.badge.w-100{ display:inline-block; }
+
+
