@@ -1,50 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Estadísticas de Ventas</title>
     <link rel="stylesheet" href="estilo.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script defer src="funciones.js"></script>
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Barra de navegación principal">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
-                <!-- Logo/Texto -->
-                <img src="img/logo.png" alt="Logo de la tienda" width="32" height="32" onerror="this.style.display='none'">
                 <span>LEVEL-UP GAMER</span>
             </a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarFS2"
-                    aria-controls="navbarFS2" aria-expanded="false" aria-label="Mostrar/ocultar menú">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarFS2">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarFS2">
                 <ul class="navbar-nav ms-auto">
-                    <!-- Tienda -->
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="estadisticas.html">Productos</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="estadisticas.html">Productos</a></li>
                     <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
                     <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
-                    <!-- Auth -->
                     <li class="nav-item"><a class="nav-link" href="registro.html">Registro</a></li>
                     <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-                    <!-- Carrito -->
                     <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center gap-1" href="carrito.html" aria-label="Ver carrito">
+                        <a class="nav-link d-flex align-items-center gap-1" href="carrito.html">
                             🛒 <span id="cartCount" class="badge text-bg-light">0</span>
                         </a>
                     </li>
-                    <!-- Admin (luego protegeremos por rol) -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="adminMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Admin
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminMenu">
+                        <a class="nav-link dropdown-toggle" href="#" id="adminMenu" role="button" data-bs-toggle="dropdown">Admin</a>
+                        <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="admin.html">Panel</a></li>
                             <li><a class="dropdown-item" href="admin-productos.html">Productos</a></li>
                             <li><a class="dropdown-item" href="admin-usuarios.html">Usuarios</a></li>
@@ -55,40 +43,156 @@
         </div>
     </nav>
 </header>
-<div class="container mt-4">
-    <h2>Estadísticas de Ventas</h2>
-    <div id="gridEstadisticas" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
-        <div class="col">
-            <div class="card h-100">
-                <img src="img/images.jpg" class="card-img-top" alt="Polera Puma" onerror="this.src='img/placeholder.jpg'">
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">Polera Puma</h5>
-                    <p class="card-text">Categoría: Ropa</p>
-                    <p class="card-text">Precio: $12.000</p>
-                    <p class="card-text">Unidades vendidas: 34</p>
-                    <a href="#" class="btn btn-primary mt-auto">Ver producto</a>
+
+<main>
+    <div class="container mt-4">
+        <h2>Estadísticas de Ventas</h2>
+        <div id="gridEstadisticas" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+
+            <!-- JM001 Catan -->
+            <div class="col">
+                <div class="card h-100">
+                    <img src="img/.jpg" class="card-img-top" alt="Catan">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Catan</h5>
+                        <p class="card-text">Categoría: Juegos de Mesa</p>
+                        <p class="card-text">Precio: $29.990</p>
+                        <p class="card-text">Unidades vendidas: 42</p>
+                        <a href="detalle.html?id=JM001" class="btn btn-primary mt-auto">Ver producto</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col">
-            <div class="card h-100">
-                <img src="img/nikeZ.jpg" class="card-img-top" alt="Zapatillas Nike" onerror="this.src='img/placeholder.jpg'">
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">Zapatillas Nike</h5>
-                    <p class="card-text">Categoría: Calzado</p>
-                    <p class="card-text">Precio: $300.000</p>
-                    <p class="card-text">Unidades vendidas: 20</p>
-                    <a href="#" class="btn btn-primary mt-auto">Ver producto</a>
+            <!-- JM002 Carcassonne -->
+            <div class="col">
+                <div class="card h-100">
+                    <img src="img/carcassonne.jpg" class="card-img-top" alt="Carcassonne">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Carcassonne</h5>
+                        <p class="card-text">Categoría: Juegos de Mesa</p>
+                        <p class="card-text">Precio: $24.990</p>
+                        <p class="card-text">Unidades vendidas: 30</p>
+                        <a href="detalle.html?id=JM002" class="btn btn-primary mt-auto">Ver producto</a>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Repite para cada producto -->
+            <!-- AC001 Controlador Xbox -->
+            <div class="col">
+                <div class="card h-100">
+                    <img src="img/controlXbox.jpg" class="card-img-top" alt="Controlador Xbox">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Controlador Inalámbrico Xbox</h5>
+                        <p class="card-text">Categoría: Accesorios</p>
+                        <p class="card-text">Precio: $59.990</p>
+                        <p class="card-text">Unidades vendidas: 55</p>
+                        <a href="detalle.html?id=AC001" class="btn btn-primary mt-auto">Ver producto</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AC002 HyperX Cloud II -->
+            <div class="col">
+                <div class="card h-100">
+                    <img src="img/hyperx.jpg" class="card-img-top" alt="HyperX Cloud II">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Auriculares HyperX Cloud II</h5>
+                        <p class="card-text">Categoría: Accesorios</p>
+                        <p class="card-text">Precio: $79.990</p>
+                        <p class="card-text">Unidades vendidas: 28</p>
+                        <a href="detalle.html?id=AC002" class="btn btn-primary mt-auto">Ver producto</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CO001 PlayStation 5 -->
+            <div class="col">
+                <div class="card h-100">
+                    <img src="img/ps5.jpg" class="card-img-top" alt="PlayStation 5">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">PlayStation 5</h5>
+                        <p class="card-text">Categoría: Consolas</p>
+                        <p class="card-text">Precio: $549.990</p>
+                        <p class="card-text">Unidades vendidas: 15</p>
+                        <a href="detalle.html?id=CO001" class="btn btn-primary mt-auto">Ver producto</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CG001 PC Gamer ASUS ROG Strix -->
+            <div class="col">
+                <div class="card h-100">
+                    <img src="img/pcrog.jpg" class="card-img-top" alt="PC Gamer ASUS ROG Strix">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">PC Gamer ASUS ROG Strix</h5>
+                        <p class="card-text">Categoría: Computadores Gamers</p>
+                        <p class="card-text">Precio: $1.299.990</p>
+                        <p class="card-text">Unidades vendidas: 8</p>
+                        <a href="detalle.html?id=CG001" class="btn btn-primary mt-auto">Ver producto</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SG001 Silla Gamer -->
+            <div class="col">
+                <div class="card h-100">
+                    <img src="img/silla.jpg" class="card-img-top" alt="Silla Gamer Secretlab Titan">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Silla Gamer Secretlab Titan</h5>
+                        <p class="card-text">Categoría: Sillas Gamers</p>
+                        <p class="card-text">Precio: $349.990</p>
+                        <p class="card-text">Unidades vendidas: 22</p>
+                        <a href="detalle.html?id=SG001" class="btn btn-primary mt-auto">Ver producto</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MS001 Mouse Logitech -->
+            <div class="col">
+                <div class="card h-100">
+                    <img src="img/mouse.jpg" class="card-img-top" alt="Mouse Logitech G502 HERO">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Mouse Logitech G502 HERO</h5>
+                        <p class="card-text">Categoría: Mouse</p>
+                        <p class="card-text">Precio: $49.990</p>
+                        <p class="card-text">Unidades vendidas: 35</p>
+                        <a href="detalle.html?id=MS001" class="btn btn-primary mt-auto">Ver producto</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MP001 Mousepad Razer -->
+            <div class="col">
+                <div class="card h-100">
+                    <img src="img/mousepad.jpg" class="card-img-top" alt="Mousepad Razer Goliathus">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Mousepad Razer Goliathus</h5>
+                        <p class="card-text">Categoría: Mousepad</p>
+                        <p class="card-text">Precio: $29.990</p>
+                        <p class="card-text">Unidades vendidas: 40</p>
+                        <a href="detalle.html?id=MP001" class="btn btn-primary mt-auto">Ver producto</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PP001 Polera Personalizada -->
+            <div class="col">
+                <div class="card h-100">
+                    <img src="img/polera.jpg" class="card-img-top" alt="Polera Gamer Personalizada Level-Up">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">Polera Gamer 'Level-Up'</h5>
+                        <p class="card-text">Categoría: Poleras Personalizadas</p>
+                        <p class="card-text">Precio: $14.990</p>
+                        <p class="card-text">Unidades vendidas: 50</p>
+                        <a href="detalle.html?id=PP001" class="btn btn-primary mt-auto">Ver producto</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-</div>
+</main>
 
-<!-- Esto siempre al fianl del body -->
 <footer class="bg-dark text-light mt-5">
     <div class="container py-4">
         <div class="row gy-3">
@@ -107,12 +211,10 @@
             <div class="col-md">
                 <h6 class="text-uppercase mb-3">Contacto</h6>
                 <address class="mb-1">Santiago, Chile</address>
-                <a class="link-light text-decoration-none" href="mailto:soporte@tiendafs2.com">soporte@levelupgamer.com</a>
+                <a class="link-light text-decoration-none" href="mailto:soporte@levelupgamer.com">soporte@levelupgamer.com</a>
             </div>
         </div>
     </div>
 </footer>
 </body>
 </html>
-
-
