@@ -17,22 +17,31 @@ function validarFormulario() {
    Datos: productos demo
    ========================= */
 const productosDemo = [
-    { id: 1, nombre: "Auriculares Inalámbricos", precio: 24990, img: "img/audifonos-wirless-earfun-free-2.jpg" }, // <-- añade .jpg
-    { id: 2, nombre: "Smartwatch Deportivo",     precio: 39990, img: "img/smarwatch.jpg" },
-    { id: 3, nombre: "Mochila Antirrobo",         precio: 19990, img: "img/audifonos-wirless-earfun-free-2.jpg" },
-    { id: 4, nombre: "Teclado Mecánico",          precio: 45990, img: "img/audifonos-wirless-earfun-free-2.jpg" },
+    {id: "PP002", nombre: "Auriculares Inalámbricos", precio: 24990, img: "img/audifonos-wirless-earfun-free-2.jpg"}, // <-- añade .jpg
+    {id: "PP003", nombre: "Smartwatch Deportivo", precio: 39990, img: "img/smarwatch.jpg"},
+    {id: "PP004", nombre: "Mochila Antirrobo", precio: 19990, img: "img/mochilla.jpg"},
+    {id: "PP005", nombre: "Teclado Ajazz", precio: 45990, img: "img/ajazz.jpg"},
 ];
 
 /* =========================
    Util: formatear CLP
    ========================= */
-const clp = (n) => n.toLocaleString("es-CL", { style: "currency", currency: "CLP", maximumFractionDigits: 0 });
+const clp = (n) => n.toLocaleString("es-CL", {style: "currency", currency: "CLP", maximumFractionDigits: 0});
 
 const CART_KEY = "fs2_cart";
+
 function getCart() {
-    try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch { return []; }
+    try {
+        return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+    } catch {
+        return [];
+    }
 }
-function setCart(cart) { localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
+
+function setCart(cart) {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+}
+
 function updateCartBadge() {
     const cart = getCart();
     const badge = document.getElementById("cartCount");
@@ -53,7 +62,7 @@ function renderProductosHome() {
           <h3 class="h6 card-title">${p.nombre}</h3>
           <p class="fw-semibold text-primary mb-3">${clp(p.precio)}</p>
           <div class="mt-auto d-flex gap-2">
-            <a href="detalle-producto.html?id=${p.id}" class="btn btn-sm btn-outline-secondary">Ver detalle</a>
+            <a href="detalle.html?id=${p.id}" class="btn btn-sm btn-outline-secondary">Ver detalle</a>
             <button class="btn btn-sm btn-primary" data-id="${p.id}">Añadir</button>
           </div>
         </div>
@@ -69,7 +78,7 @@ function renderProductosHome() {
         if (!prod) return;
 
         const cart = getCart();
-        cart.push({ id: prod.id, nombre: prod.nombre, precio: prod.precio, qty: 1 });
+        cart.push({id: prod.id, nombre: prod.nombre, precio: prod.precio, qty: 1});
         setCart(cart);
         updateCartBadge();
     });

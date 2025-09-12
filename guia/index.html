@@ -16,8 +16,6 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Barra de navegación principal">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
-                <!-- Logo/Texto -->
-                <img src="img/logo.png" alt="Logo de la tienda" width="32" height="32" onerror="this.style.display='none'">
                 <span>LEVEL-UP GAMER</span>
             </a>
 
@@ -42,7 +40,7 @@
                             🛒 <span id="cartCount" class="badge text-bg-light">0</span>
                         </a>
                     </li>
-                    <!-- Admin -->
+                    <!-- Admin (luego protegeremos por rol) -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="adminMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Admin
@@ -58,7 +56,6 @@
         </div>
     </nav>
 </header>
-
 <main id="contenido" class="py-4">
     <div class="container">
         <!-- HERO -->
@@ -74,21 +71,22 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <img src="img/audifonos-wirless-earfun-free-2.jpg" alt="Imagen destacada de la tienda" class="img-fluid rounded-4 shadow-sm" onerror="this.style.display='none'">
+                <img src="img/lgamer.jpg" class="Imagen destacada de la tienda" alt="Imagen destacada de la tienda" width="400" height="400">
             </div>
         </section>
 
-        <!-- Productos destacados -->
         <section aria-labelledby="titulo-productos">
             <div class="d-flex justify-content-between align-items-end mb-3">
                 <h2 id="titulo-productos" class="h4 mb-0">Productos destacados</h2>
             </div>
+
 
             <div id="gridProductos" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4"></div>
         </section>
     </div>
 </main>
 
+<!-- Esto siempre al fianl del body -->
 <footer class="bg-dark text-light mt-5">
     <div class="container py-4">
         <div class="row gy-3">
@@ -107,39 +105,10 @@
             <div class="col-md">
                 <h6 class="text-uppercase mb-3">Contacto</h6>
                 <address class="mb-1">Santiago, Chile</address>
-                <a class="link-light text-decoration-none" href="mailto:soporte@levelupgamer.com">soporte@levelupgamer.com</a>
+                <a class="link-light text-decoration-none" href="mailto:soporte@tiendafs2.com">soporte@levelupgamer.com</a>
             </div>
         </div>
     </div>
 </footer>
-
-<!-- Script de productos destacados -->
-<script>
-    const productosDestacados = [
-        { id:"JM001", nombre:"Catan", precio:"$29.990", imagen:"img/Carcassonne.jpg" },
-        { id:"AC002", nombre:"Auriculares HyperX Cloud II", precio:"$79.990", imagen:"img/hyperx.jpg" },
-        { id:"CO001", nombre:"PlayStation 5", precio:"$549.990", imagen:"img/ps5.jpg" },
-        { id:"SG001", nombre:"Silla Gamer Secretlab Titan", precio:"$349.990", imagen:"img/silla.jpg" }
-    ];
-
-    const contenedor = document.getElementById("gridProductos");
-
-    productosDestacados.forEach(p => {
-        const card = document.createElement("div");
-        card.className = "col";
-        card.innerHTML = `
-            <div class="card h-100 shadow-sm">
-                <img src="${p.imagen}" class="card-img-top" alt="${p.nombre}">
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">${p.nombre}</h5>
-                    <p class="card-text">${p.precio}</p>
-                    <a href="detalle.html?id=${p.id}" class="btn btn-primary mt-auto">Ver producto</a>
-                </div>
-            </div>
-        `;
-        contenedor.appendChild(card);
-    });
-</script>
-
 </body>
 </html>
