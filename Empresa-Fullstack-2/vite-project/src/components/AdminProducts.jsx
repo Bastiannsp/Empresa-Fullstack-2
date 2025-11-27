@@ -121,7 +121,7 @@ function AdminProducts() {
         </div>
       </div>
 
-      <h3 className="h5 mt-5 mb-3">Inventario (Base de Datos H2)</h3>
+      <h3 className="h5 mt-5 mb-3">Inventario (Base de Datos Oracle)</h3>
       <div className="table-responsive">
         <table className="table table-striped table-hover align-middle">
           <thead className="table-dark">

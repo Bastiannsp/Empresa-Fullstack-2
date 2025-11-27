@@ -1,22 +1,67 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { getProductById } from '../database';
+import ProductService from '../services/ProductService';
 import { useCart } from '../context/CartContext';
 
 const clp = (n) => n.toLocaleString("es-CL", { style: "currency", currency: "CLP", maximumFractionDigits: 0 });
 
 function ProductDetail() {
   const { id } = useParams();
-  
-  const product = getProductById(id);
-  
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const { agregarProducto } = useCart();
 
-  if (!product) {
+  useEffect(() => {
+    let activo = true;
+    setLoading(true);
+    setError(null);
+
+    ProductService.getProductById(id)
+      .then((response) => {
+        if (!activo) return;
+        setProduct(response.data);
+      })
+      .catch((err) => {
+        console.error(`No pudimos cargar el producto ${id}`, err);
+        if (!activo) return;
+        setError('Producto no encontrado o inaccesible.');
+        setProduct(null);
+      })
+      .finally(() => {
+        if (activo) {
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      activo = false;
+    };
+  }, [id]);
+
+  const imageSrc = useMemo(() => {
+    if (!product?.imagen) {
+      return undefined;
+    }
+    if (product.imagen.startsWith('http')) {
+      return product.imagen;
+    }
+    return product.imagen.startsWith('/') ? product.imagen : `/${product.imagen}`;
+  }, [product?.imagen]);
+
+  if (loading) {
+    return (
+      <div className="container my-5 text-center">
+        <p>Cargando producto...</p>
+      </div>
+    );
+  }
+
+  if (error || !product) {
     return (
       <div className="container my-5 text-center">
         <h2 className="display-4">Producto no encontrado</h2>
-        <p className="lead">El producto que buscas no existe.</p>
+        <p className="lead">{error ?? 'El producto que buscas no existe.'}</p>
         <Link to="/productos" className="btn btn-primary">
           ← Volver a productos
         </Link>
@@ -34,7 +79,7 @@ function ProductDetail() {
             <div className="row g-0">
               <div className="col-md-5">
                 <img 
-                  src={`/${product.imagen}`}
+                  src={imageSrc}
                   className="img-fluid rounded-start" 
                   alt={product.nombre}
                 />

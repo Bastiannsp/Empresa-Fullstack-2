@@ -1,16 +1,45 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getProducts } from '../database';
+import ProductService from '../services/ProductService';
 import ProductCard from './ProductCard';
 
 function Home() {
   const [destacados, setDestacados] = useState([]);
-  const idsDestacados = ["PP002", "PP003", "PP004", "PP005"];
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const seleccionarDestacados = useMemo(() => (productos) => {
+    if (!Array.isArray(productos) || productos.length === 0) {
+      return [];
+    }
+    const ordenados = [...productos].sort((a, b) => (b.vendidos ?? 0) - (a.vendidos ?? 0));
+    return ordenados.slice(0, 4);
+  }, []);
 
   useEffect(() => {
-    const allProducts = getProducts();
-    const productosDestacados = allProducts.filter(p => idsDestacados.includes(p.id));
-    setDestacados(productosDestacados);
+    let activo = true;
+
+    ProductService.getAllProducts()
+      .then((response) => {
+        if (!activo) return;
+        setDestacados(seleccionarDestacados(response.data));
+        setError(null);
+      })
+      .catch((err) => {
+        console.error('No pudimos cargar los productos destacados', err);
+        if (!activo) return;
+        setDestacados([]);
+        setError('No pudimos cargar los productos destacados.');
+      })
+      .finally(() => {
+        if (activo) {
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      activo = false;
+    };
   }, []);
 
   return (
@@ -41,8 +70,10 @@ function Home() {
       {}
       <section>
         <h2 className="h4 mb-3">Productos destacados</h2>
+        {error && <p className="text-danger small">{error}</p>}
+        {loading && <p>Cargando destacados...</p>}
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-          {destacados.map(product => (
+          {!loading && destacados.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
