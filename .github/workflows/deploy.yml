@@ -1,34 +1,58 @@
-jobs:
-  build:
-    runs-on: ubuntu-latest
+name: Build and Deploy
 
-    steps:
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+build:
+runs-on: ubuntu-latest
+
+steps:
     - uses: actions/checkout@v3
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
     # ... (pasos de setup de Java) ...
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: maven
 
-    # PASO NUEVO: Decodificar la Wallet
-    - name: Setup Oracle Wallet
-      run: |
-        # 1. Crear directorio donde irá la wallet
+# PASO NUEVO: Decodificar la Wallet
+- name: Setup Oracle Wallet
+run: |
+       # 1. Crear directorio donde irá la wallet
         mkdir -p wallet_dir 
-        
-        # 2. Decodificar el secreto y guardarlo como zip
+        mkdir -p gamer/wallet_dir 
+       
+       # 2. Decodificar el secreto y guardarlo como zip
         echo "${{ secrets.ORACLE_WALLET_BASE64 }}" | base64 -d > wallet_dir/wallet.zip
-        
-        # 3. Descomprimir el zip
+        echo "${{ secrets.ORACLE_WALLET_BASE64 }}" | base64 -d > gamer/wallet_dir/wallet.zip
+       
+       # 3. Descomprimir el zip
         unzip wallet_dir/wallet.zip -d wallet_dir
-        
-        # 4. Listar para verificar (opcional, útil para debug)
+        unzip gamer/wallet_dir/wallet.zip -d gamer/wallet_dir
+       
+       # 4. Listar para verificar (opcional, útil para debug)
         ls -R wallet_dir
+        ls -R gamer/wallet_dir
 
-    # PASO DE COMPILACIÓN/EJECUCIÓN
-    - name: Build with Maven
+   # PASO DE COMPILACIÓN/EJECUCIÓN
+- name: Build with Maven
       run: mvn clean package
-      env:
-        # Aquí le decimos a Spring dónde está la wallet descomprimida
-        # TNS_ADMIN debe apuntar a la carpeta que creamos arriba
-        DB_URL: "jdbc:oracle:thin:@bdaplicada_high?TNS_ADMIN=./wallet_dir"
-        DB_USERNAME: ${{ secrets.DB_USERNAME }}
-        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-        JWT_SECRET: ${{ secrets.JWT_SECRET }}
+      working-directory: ./gamer
+      run: mvn clean package -DskipTests
+env:
+# Aquí le decimos a Spring dónde está la wallet descomprimida
+# TNS_ADMIN debe apuntar a la carpeta que creamos arriba
+DB_URL: "jdbc:oracle:thin:@bdaplicada_high?TNS_ADMIN=./wallet_dir"
+DB_USERNAME: ${{ secrets.DB_USERNAME }}
+DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+JWT_SECRET: ${{ secrets.JWT_SECRET }}
