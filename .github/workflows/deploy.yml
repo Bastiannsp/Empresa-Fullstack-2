@@ -1,0 +1,5 @@
+env:
+  DB_URL: "jdbc:oracle:thin:@bdaplicada_high?TNS_ADMIN=./wallet" # Ruta relativa en el contenedor/runner
+  DB_USERNAME: ${{ secrets.DB_USERNAME }}
+  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
