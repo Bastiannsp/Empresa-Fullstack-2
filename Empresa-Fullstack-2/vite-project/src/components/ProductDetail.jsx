@@ -93,7 +93,7 @@ function ProductDetail() {
                   <p className="card-text mt-3">{product.descripcion}</p>
                   <button
                     className="btn btn-success mt-auto"
-                    onClick={() => agregarProducto(product.id, product.nombre, product.precio,product.imagen)}
+                    onClick={() => agregarProducto(product.id, product.nombre, product.precio, imageSrc ?? product.imagen)}
                   >
                     🛒 Agregar al carrito
                   </button>

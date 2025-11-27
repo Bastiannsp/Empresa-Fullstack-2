@@ -7,6 +7,8 @@ function NavBar() {
   const { totalUnidades } = useCart();
   const { isAuthenticated, user, logout, permissions } = useAuth();
 
+  const displayName = user?.fullName || user?.username || 'Cuenta';
+
   const isAdmin = permissions.canAccessAdmin;
 
   return (
@@ -48,9 +50,10 @@ function NavBar() {
               {isAuthenticated && (
                 <li className="nav-item dropdown">
                   <button className="nav-link dropdown-toggle btn btn-link text-decoration-none" id="userMenu" type="button" data-bs-toggle="dropdown">
-                    {user?.username || 'Cuenta'}
+                    {displayName}
                   </button>
                   <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                    <li><Link className="dropdown-item" to="/perfil">Mi perfil</Link></li>
                     {isAdmin && (
                       <li><Link className="dropdown-item" to="/admin">Panel Admin</Link></li>
                     )}

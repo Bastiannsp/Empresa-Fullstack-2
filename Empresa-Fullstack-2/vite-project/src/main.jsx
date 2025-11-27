@@ -16,6 +16,7 @@ import Carrito from './components/Carrito.jsx';
 import Checkout from './components/Checkout.jsx';         
 import Confirmacion from './components/Confirmacion.jsx'; 
 import ProtectedRoute from './components/ProtectedRoute.jsx';
+import Profile from './components/Profile.jsx';
 
 import { CartProvider } from './context/CartContext.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
@@ -39,6 +40,13 @@ const router = createBrowserRouter([
       { path: "/carrito", element: <Carrito /> },
       { path: "/checkout", element: <Checkout /> },
       { path: "/confirmacion", element: <Confirmacion /> },
+      {
+        path: "/perfil",
+        element: <ProtectedRoute />,
+        children: [
+          { index: true, element: <Profile /> }
+        ]
+      },
       {
         path: "/admin",
         element: <ProtectedRoute roles={['ROLE_ADMIN']} />,

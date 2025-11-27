@@ -42,7 +42,13 @@ public class AuthController {
                 .roles(user.getRole().name().replace("ROLE_", ""))
                 .build();
         String token = jwtService.generateToken(userDetails);
-        return ResponseEntity.ok(new AuthResponse(token, user.getUsername(), user.getRole().name()));
+        return ResponseEntity.ok(new AuthResponse(
+            token,
+            user.getUsername(),
+            user.getRole().name(),
+            user.getFullName(),
+            user.getEmail()
+        ));
     }
 
     @PostMapping("/login")
@@ -52,6 +58,13 @@ public class AuthController {
         );
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String token = jwtService.generateToken(userDetails);
-        return ResponseEntity.ok(new AuthResponse(token, userDetails.getUsername(), userDetails.getAuthorities().iterator().next().getAuthority()));
+        com.levelup.gamer.model.User domainUser = authService.getByUsername(userDetails.getUsername());
+        return ResponseEntity.ok(new AuthResponse(
+            token,
+            userDetails.getUsername(),
+            userDetails.getAuthorities().iterator().next().getAuthority(),
+            domainUser.getFullName(),
+            domainUser.getEmail()
+        ));
     }
 }

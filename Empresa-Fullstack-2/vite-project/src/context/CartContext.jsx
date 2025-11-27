@@ -24,12 +24,12 @@ export function CartProvider({ children }) {
         nuevoCarrito[idx] = { 
           ...nuevoCarrito[idx], 
           cantidad: nuevoCarrito[idx].cantidad + 1,
-          precio, 
-          imagen  
+          precio,
+          imagen: imagen || nuevoCarrito[idx].imagen 
         };
         return nuevoCarrito;
       } else {
-        return [...prevCarrito, { id, nombre, precio, imagen, cantidad: 1 }];
+        return [...prevCarrito, { id, nombre, precio, imagen: imagen || null, cantidad: 1 }];
       }
     });
   };

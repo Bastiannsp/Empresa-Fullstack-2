@@ -24,9 +24,11 @@ public class AuthService {
             throw new IllegalArgumentException("El usuario ya existe");
         }
         User user = new User();
-        user.setUsername(request.getUsername());
+        user.setUsername(request.getUsername().trim());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(request.getRole());
+        user.setFullName(request.getFullName().trim());
+        user.setEmail(request.getEmail().trim());
         return userRepository.save(user);
     }
 

@@ -16,7 +16,7 @@ function ProductCard({ product }) {
   }, [product?.imagen]);
 
   const handleAddToCart = () => {
-    agregarProducto(product.id, product.nombre, product.precio);
+    agregarProducto(product.id, product.nombre, product.precio, imageSrc ?? product.imagen);
   };
 
   return (

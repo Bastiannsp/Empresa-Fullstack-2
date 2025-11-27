@@ -52,43 +52,50 @@ function Carrito() {
           </thead>
           {}
           <tbody id="carritoItems">
-            {carrito.map(item => (
-              <tr key={item.id}>
-                <td>
-                  {}
-                  <img 
-                    src={item.imagen ? (item.imagen.startsWith('http') ? item.imagen : `/${item.imagen}`) : '/img/logo.png'} 
-                    alt={item.nombre} 
-                    style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '4px' }} 
-                  />
-                </td>
-                <td>{item.nombre}</td>
-                <td className="text-nowrap">
-                  <button 
-                    className="btn btn-sm btn-outline-secondary"
-                    onClick={() => cambiarCantidad(item.id, -1)}
-                  >
-                    −
-                  </button>
-                  <span className="mx-2">{item.cantidad}</span>
-                  <button 
-                    className="btn btn-sm btn-outline-secondary"
-                    onClick={() => cambiarCantidad(item.id, +1)}
-                  >
-                    +
-                  </button>
-                </td>
-                <td>{fmtCLP.format(item.precio * item.cantidad)}</td>
-                <td>
-                  <button 
-                    className="btn btn-sm btn-danger"
-                    onClick={() => eliminarProducto(item.id)}
-                  >
-                    Eliminar
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {carrito.map((item) => {
+              const imagen = item.imagen;
+              const imagenSrc = imagen
+                ? (imagen.startsWith('http') ? imagen : (imagen.startsWith('/') ? imagen : `/${imagen}`))
+                : '/img/logo.png';
+
+              return (
+                <tr key={item.id}>
+                  <td>
+                    {}
+                    <img 
+                      src={imagenSrc} 
+                      alt={item.nombre} 
+                      style={{ width: '60px', height: '60px', objectFit: 'cover', borderRadius: '4px' }} 
+                    />
+                  </td>
+                  <td>{item.nombre}</td>
+                  <td className="text-nowrap">
+                    <button 
+                      className="btn btn-sm btn-outline-secondary"
+                      onClick={() => cambiarCantidad(item.id, -1)}
+                    >
+                      −
+                    </button>
+                    <span className="mx-2">{item.cantidad}</span>
+                    <button 
+                      className="btn btn-sm btn-outline-secondary"
+                      onClick={() => cambiarCantidad(item.id, +1)}
+                    >
+                      +
+                    </button>
+                  </td>
+                  <td>{fmtCLP.format(item.precio * item.cantidad)}</td>
+                  <td>
+                    <button 
+                      className="btn btn-sm btn-danger"
+                      onClick={() => eliminarProducto(item.id)}
+                    >
+                      Eliminar
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
           {}
         </table>

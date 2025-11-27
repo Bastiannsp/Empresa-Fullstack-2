@@ -49,7 +49,9 @@ export function AuthProvider({ children }) {
       if (token && !isExpired) {
         const sessionUser = user ?? {
           username: payload?.sub || null,
-          role: payload?.role || payload?.roles || null
+          role: payload?.role || payload?.roles || null,
+          fullName: null,
+          email: null
         };
         syncAxiosAuthHeader(token);
         setState({ user: sessionUser, token, loading: false });
@@ -69,16 +71,27 @@ export function AuthProvider({ children }) {
     setState({ user, token, loading: false });
   }, []);
 
+  const updateSessionUser = useCallback((partial) => {
+    setState((prev) => {
+      if (!prev.token) {
+        return prev;
+      }
+      const nextUser = { ...(prev.user ?? {}), ...partial };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ token: prev.token, user: nextUser }));
+      return { ...prev, user: nextUser };
+    });
+  }, []);
+
   const login = useCallback(async ({ username, password }) => {
     const { data } = await AuthService.login({ username, password });
-    const sessionUser = { username: data.username, role: data.role };
+    const sessionUser = { username: data.username, role: data.role, fullName: data.fullName, email: data.email };
     persistSession(data.token, sessionUser);
     return sessionUser;
   }, [persistSession]);
 
-  const register = useCallback(async ({ username, password, role }) => {
-    const { data } = await AuthService.register({ username, password, role });
-    const sessionUser = { username: data.username, role: data.role };
+  const register = useCallback(async ({ username, password, role, fullName, email }) => {
+    const { data } = await AuthService.register({ username, password, role, fullName, email });
+    const sessionUser = { username: data.username, role: data.role, fullName: data.fullName, email: data.email };
     persistSession(data.token, sessionUser);
     return sessionUser;
   }, [persistSession]);
@@ -120,8 +133,9 @@ export function AuthProvider({ children }) {
     hasAnyRole,
     login,
     register,
-    logout
-  }), [state.user, state.token, role, state.loading, isAuthenticated, isAdmin, isUser, permissions, hasRole, hasAnyRole, login, register, logout]);
+    logout,
+    updateSessionUser
+  }), [state.user, state.token, role, state.loading, isAuthenticated, isAdmin, isUser, permissions, hasRole, hasAnyRole, login, register, logout, updateSessionUser]);
 
   return (
     <AuthContext.Provider value={value}>

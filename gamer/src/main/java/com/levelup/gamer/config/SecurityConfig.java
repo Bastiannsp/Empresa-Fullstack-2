@@ -42,6 +42,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                     .requestMatchers("/api/auth/**", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                     .requestMatchers(HttpMethod.GET, "/api/products/**").permitAll()
+                    .requestMatchers("/api/users/**").authenticated()
                     .anyRequest().hasRole("ADMIN")
                 )
                 .authenticationProvider(daoAuthenticationProvider())

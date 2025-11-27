@@ -31,7 +31,13 @@ function Registro() {
 
     try {
       setSubmitting(true);
-      await register({ username: email.trim(), password, role: 'ROLE_USER' });
+      await register({
+        username: email.trim(),
+        password,
+        role: 'ROLE_USER',
+        email: email.trim(),
+        fullName: nombre.trim()
+      });
       const extra = descuento ? 'Tienes descuento 🎉' : '';
       setMensaje({ tipo: 'success', texto: `✅ ¡Registro exitoso, ${nombre}! ${extra}`.trim() });
       setTimeout(() => navigate('/'), 1500);
