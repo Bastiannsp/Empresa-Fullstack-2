@@ -1,8 +1,4 @@
 .mvn/wrapper/maven-wrapper.jar
-mvnw.cmd
-mvnw
-Dockerfile
-Dockerfile.*
 README.md
 pom.xml.versionsBackup
 target/
