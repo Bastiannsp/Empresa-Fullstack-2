@@ -78,7 +78,9 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         List<String> origins = allowedOrigins.equals("*") 
             ? List.of("*") 
-            : Arrays.asList(allowedOrigins.split(","));
+            : Arrays.stream(allowedOrigins.split(","))
+                    .map(String::trim)
+                    .toList();
         configuration.setAllowedOrigins(origins);
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
