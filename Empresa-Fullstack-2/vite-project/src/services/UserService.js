@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const USERS_URL = 'http://localhost:8080/api/users';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8080/api';
+const USERS_URL = `${API_BASE_URL}/users`;
 
 const UserService = {
   getProfile() {
