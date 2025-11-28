@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const AUTH_URL = 'http://localhost:8080/api/auth';
+const API_BASE_URL = (import.meta.env?.VITE_API_BASE_URL || 'http://localhost:8080/api').replace(/\/$/, '');
+const AUTH_URL = `${API_BASE_URL}/auth`;
 
 const AuthService = {
   login(credentials) {
