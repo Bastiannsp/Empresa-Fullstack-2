@@ -23,6 +23,9 @@ WORKDIR /app
 # Copy the fat jar from the build stage
 COPY --from=build /app/target/gamer-0.0.1-SNAPSHOT.jar app.jar
 
+# Bundle Oracle wallet assets so the thin driver can resolve TNS entries
+COPY wallet /app/wallet
+
 # Render injects PORT; expose the default for local use
 EXPOSE 8080
 ENV JAVA_OPTS=""
